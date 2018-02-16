@@ -5,23 +5,39 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server"
+    "start": "node server",
+    "start:dev": "nodemon server",
+    "build": "webpack -d --watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amelia-brown/carousel-project.git"
   },
-  "author": "",
+  "author": "Airyque Ervin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/amelia-brown/carousel-project/issues"
   },
   "homepage": "https://github.com/amelia-brown/carousel-project#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "diskdb": "^0.1.17",
     "express": "^4.16.2",
-    "node-fetch": "^2.0.0"
+    "node-fetch": "^2.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "webpack": "^3.11.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.9",
+    "nodemon": "^1.15.0",
+    "style-loader": "^0.20.2"
   }
 }

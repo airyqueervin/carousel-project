@@ -1,12 +1,15 @@
 const express = require('express')
 const cors = require('cors')
 var bodyParser = require('body-parser')
+const path = require('path')
 
 const utils = require('./utils')
 
 const app = express()
 
 app.use(bodyParser.json())
+
+app.use(express.static(path.join(__dirname, '../dist')))
 
 app.use(cors())
 
