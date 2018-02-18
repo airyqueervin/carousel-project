@@ -31,6 +31,14 @@ class App extends Component {
   }
 
   componentWillMount() {
+    this.fetch();
+  }
+
+  componentDidMount() {
+    this.activateDots(this.state.currPage);
+  }
+
+  fetch = () => {
     axios.get('/items')
     .then(items => {
       this.setState({ data: items });
@@ -38,10 +46,6 @@ class App extends Component {
     .catch(err => {
       throw err;
     })
-  }
-
-  componentDidMount() {
-    this.activateDots(this.state.currPage);
   }
 
   plusSlides = (val) => {
@@ -86,7 +90,7 @@ class App extends Component {
           </div>
         </div>
         <div className="slideshow-container">
-          {this.state.data ? <MediaList media={this.state.data} pageNum={this.state.pageNum} currPage={this.state.currPage} /> : null}
+          {this.state.data ? <MediaList media={this.state.data} pageNum={this.state.pageNum} currPage={this.state.currPage} fetch={this.fetch} /> : null}
         </div>
         <div className="prevNextPos">
           <a className="prev" onClick={() => this.plusSlides(-1)}>&#10094;</a>
