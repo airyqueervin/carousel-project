@@ -7,39 +7,21 @@ class App extends Component {
     super(props);
     this.state = {
       data: '',
-      pageNum: {
-        1: {
-          start: 0,
-          end: 4
-        },
-        2: {
-          start: 4,
-          end: 8
-        },
-        3: {
-          start: 8,
-          end: 12
-        },
-        4: {
-          start: 12,
-          end: 16
-        },
-      },
       currPage: 1,
       pages: 4
     };
   }
 
   componentWillMount() {
-    this.fetch();
+    this.fetchData(this.state.currPage, this.state.pages);
   }
 
   componentDidMount() {
     this.activateDots(this.state.currPage);
   }
 
-  fetch = () => {
-    axios.get('/items')
+  fetchData = (page, amt) => {
+    axios.get(`/items/?page=${page}&amt=${amt}`)
     .then(items => {
       this.setState({ data: items });
     })
@@ -49,27 +31,34 @@ class App extends Component {
   }
 
   plusSlides = (val) => {
-    if ((this.state.currPage + val) > 4) {
+    let currPage = this.state.currPage;
+    if ((currPage + val) > 4) {
       this.activateDots(1);
-      this.setState({currPage: 1})  
-    } else if ((this.state.currPage + val) < 1) {
+      this.setState({currPage: 1}, () => {
+        this.fetchData(1, this.state.pages)
+      })  
+    } else if ((currPage + val) < 1) {
       this.activateDots(4);
-      this.setState({currPage: 4})
+      this.setState({currPage: 4}, () => {
+        this.fetchData(4, this.state.pages)
+      })
     } else {
-      this.activateDots(this.state.currPage + val);
-      this.setState({currPage: this.state.currPage + val})
+      this.activateDots(currPage + val);
+      this.setState({currPage: currPage + val}, () => {
+        this.fetchData(this.state.currPage, this.state.pages)
+      })
     }
   }
 
   currentSlide = (val) => {
     this.activateDots(val);
-    this.setState({currPage: val});
+    this.setState({currPage: val}, () => {
+      this.fetchData(this.state.currPage, this.state.pages)
+    })
   }
 
   activateDots = (n) => {
     let dots = document.getElementsByClassName("dot");
-    console.log(dots)
- 
     for (let i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
@@ -90,17 +79,12 @@ class App extends Component {
           </div>
         </div>
         <div className="slideshow-container">
-          {this.state.data ? <MediaList media={this.state.data} pageNum={this.state.pageNum} currPage={this.state.currPage} fetch={this.fetch} /> : null}
+          {this.state.data ? <MediaList media={this.state.data} currPage={this.state.currPage} pages={this.state.pages} fetch={this.fetchData} /> : null}
         </div>
         <div className="prevNextPos">
           <a className="prev" onClick={() => this.plusSlides(-1)}>&#10094;</a>
           <a className="next" onClick={() => this.plusSlides(1)}>&#10095;</a>
         </div>
-        {/* This is where the dots live */}
-          {/* <span className="dot" onClick={() => this.currentSlide(1)}></span> 
-          <span className="dot" onClick={() => this.currentSlide(2)}></span> 
-          <span className="dot" onClick={() => this.currentSlide(3)}></span> 
-          <span className="dot" onClick={() => this.currentSlide(4)}></span>  */}
       </div>
     ) 
   }

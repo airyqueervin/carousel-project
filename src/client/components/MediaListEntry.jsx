@@ -10,7 +10,7 @@ class MediaListEntry extends Component {
     };
   }
 
-  handleLike = (rating) => {
+  handleLike = () => {
     axios.post(`/items/${this.props.item.uuid}`, {
       rating: 'like'
     })
@@ -20,7 +20,7 @@ class MediaListEntry extends Component {
     .catch(err => {
       throw err
     })
-    this.props.fetch();
+    this.props.fetch(this.props.currPage, this.props.pages);
     this.setState({heartVis: !this.state.heartVis})
   }
 
