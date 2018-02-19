@@ -9,6 +9,10 @@ body {
   color: white; 
 }
 
+.container {
+  padding-top: 40px;
+}
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
