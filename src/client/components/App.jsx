@@ -60,11 +60,10 @@ class App extends Component {
   activateDots = (n) => {
     let dots = document.getElementsByClassName("dot");
     for (let i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
+      dots[i].className = dots[i].className.replace(" active", "");
     }
     dots[n-1].className += " active";
   } 
-    
 
   render() {
     const dots = [];
@@ -75,11 +74,12 @@ class App extends Component {
       <div className="container">
         <div style={{fontSize: "34px", marginBottom: "40px", position:"relative"}}>Top recommendations for you
           <div className="dot-container">
-            {dots}
+            {/* --------- Dots Being Rendered Here ------ */}
+            { dots }
           </div>
         </div>
         <div className="slideshow-container">
-          {this.state.data ? <MediaList media={this.state.data} currPage={this.state.currPage} pages={this.state.pages} fetch={this.fetchData} /> : null}
+          { this.state.data ? <MediaList media={this.state.data} currPage={this.state.currPage} pages={this.state.pages} fetch={this.fetchData} /> : null }
         </div>
         <div className="prevNextPos">
           <a className="prev" onClick={() => this.plusSlides(-1)}>&#10094;</a>

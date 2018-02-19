@@ -2,6 +2,8 @@
 
 ## Requirements:
 
+This app uses React and Webpack. To run the project, follow the instructions here: [Go to setup](#setup)
+
 Fetch items from the API And display them as a carousel. Follow the
 design as closely as possible (wireframes are included in the project).
 
@@ -25,9 +27,10 @@ Icons can be found at http://google.github.io/material-design-icons/
 
 A similar font can be found at https://fonts.google.com/specimen/Roboto
 
+# Setup
 ## To run the API server:
 
-`npm install && npm run start`
+`npm install && npm run start && npm run build`
 
 to get items:
 

@@ -15,6 +15,16 @@ function read (amt, page) {
   return entities
 }
 
+function readRating (amt, page) {
+  let result = db['items'].find().filter(item => {
+    return item.rating !== 'like';
+  })
+  let start = (page * amt) - amt
+  let end = (page * amt)
+  let entities = result.slice(start, end)
+  return entities
+}
+
 function write (id, rating) {
   let query = {uuid: id}
   let update = {rating}
@@ -25,5 +35,6 @@ function write (id, rating) {
 
 module.exports = {
   write,
-  read
+  read,
+  readRating
 }

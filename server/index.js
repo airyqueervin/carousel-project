@@ -24,7 +24,7 @@ app.post('/items/:id', (req, res) => {
 app.get('/items', (req, res) => {
   let amt = parseInt(req.query.amt) || 20
   let page = parseInt(req.query.page) || 1
-  let resp = utils.read(amt, page)
+  let resp = utils.readRating(amt, page)
   if (resp) return res.send(resp)
   return res.status(500).send('could not read results')
 })
